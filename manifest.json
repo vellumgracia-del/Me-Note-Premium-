@@ -1,1 +1,21 @@
-
+{
+    "name": "Me Note Premium",
+    "short_name": "MeNote",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ecfdf5",
+    "theme_color": "#ecfdf5",
+    "description": "Aplikasi catatan modern dengan fitur coding dan keuangan.",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/3209/3209265.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
