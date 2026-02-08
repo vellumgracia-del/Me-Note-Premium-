@@ -61,13 +61,11 @@
     </script>
 
     <style>
-        /* Custom Utilities */
         body {
             -webkit-tap-highlight-color: transparent;
             overscroll-behavior-y: none;
         }
         
-        /* Hide Scrollbar but allow scroll */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -76,7 +74,6 @@
             scrollbar-width: none;
         }
 
-        /* Glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
@@ -84,7 +81,6 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Landing Animation (Dipertahankan sesuai request) */
         .path {
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
@@ -92,9 +88,7 @@
         }
 
         @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
+            to { stroke-dashoffset: 0; }
         }
 
         .fade-out {
@@ -109,7 +103,6 @@
     <!-- LANDING SCREEN -->
     <div id="landing-screen" class="fixed inset-0 z-50 bg-brand-50 flex flex-col items-center justify-center">
         <div class="relative w-32 h-32 mb-6">
-            <!-- Animated SVG Logo -->
             <svg class="w-full h-full text-brand-600 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path class="path" d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                 <rect class="path" x="8" y="2" width="8" height="4" rx="1" ry="1" style="animation-delay: 0.5s"></rect>
@@ -138,7 +131,6 @@
 
         <!-- VIEW: NOTES (DEFAULT) -->
         <div id="view-notes" class="view-section space-y-4">
-            <!-- Add Note Button -->
             <div onclick="openModal('note')" class="bg-white rounded-2xl p-4 shadow-sm border border-brand-100 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-all group">
                 <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center group-hover:bg-brand-600 group-hover:text-white transition-colors">
                     <i class="ph ph-plus text-2xl"></i>
@@ -148,11 +140,7 @@
                     <p class="text-sm text-gray-400">Tulis ide atau tugas harian</p>
                 </div>
             </div>
-
-            <!-- Notes List -->
-            <div id="notes-list" class="grid gap-3">
-                <!-- Content injected via JS -->
-            </div>
+            <div id="notes-list" class="grid gap-3"></div>
         </div>
 
         <!-- VIEW: CODE -->
@@ -171,15 +159,11 @@
                     </div>
                 </div>
             </div>
-
-            <div id="code-list" class="space-y-4">
-                <!-- Content injected via JS -->
-            </div>
+            <div id="code-list" class="space-y-4"></div>
         </div>
 
         <!-- VIEW: EXPENSES -->
         <div id="view-expenses" class="view-section hidden space-y-6">
-            <!-- Balance Card -->
             <div class="bg-gradient-to-br from-brand-600 to-brand-800 rounded-3xl p-6 text-white shadow-xl shadow-brand-200 relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl"></div>
                 <p class="text-brand-100 text-sm font-medium mb-1">Total Pengeluaran</p>
@@ -193,33 +177,27 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Expense List -->
             <div>
                 <div class="flex justify-between items-center mb-3 px-1">
                     <h4 class="font-bold text-gray-700">Riwayat Belanja</h4>
                     <span class="text-xs text-gray-400 bg-white px-2 py-1 rounded-lg border">Bulan Ini</span>
                 </div>
-                <div id="expense-list" class="space-y-2">
-                    <!-- Content injected via JS -->
-                </div>
+                <div id="expense-list" class="space-y-2"></div>
             </div>
         </div>
     </main>
 
-    <!-- FLOATING NAVIGATION (iOS Style) -->
+    <!-- FLOATING NAVIGATION -->
     <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-40">
         <div class="glass rounded-3xl p-2 shadow-2xl shadow-brand-900/10 flex justify-between items-center px-6">
             <button onclick="switchTab('notes')" class="nav-btn active flex flex-col items-center gap-1 p-2 rounded-xl transition-all w-16" data-tab="notes">
                 <i class="ph ph-notepad text-2xl mb-0.5"></i>
                 <span class="text-[9px] font-bold">Notes</span>
             </button>
-            
             <button onclick="switchTab('code')" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl transition-all w-16 text-gray-400" data-tab="code">
                 <i class="ph ph-code text-2xl mb-0.5"></i>
                 <span class="text-[9px] font-bold">Code</span>
             </button>
-            
             <button onclick="switchTab('expenses')" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl transition-all w-16 text-gray-400" data-tab="expenses">
                 <i class="ph ph-wallet text-2xl mb-0.5"></i>
                 <span class="text-[9px] font-bold">Wallet</span>
@@ -233,12 +211,15 @@
         <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 transform transition-transform duration-300 translate-y-full" id="modal-content">
             <div class="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-6"></div>
             
-            <h3 id="modal-title" class="text-xl font-bold mb-4 text-gray-800">New Entry</h3>
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-bold text-gray-800">New Entry</h3>
+                <span id="mode-indicator" class="text-xs font-bold text-brand-600 bg-brand-100 px-2 py-1 rounded-md hidden">EDIT MODE</span>
+            </div>
             
             <div id="modal-form-area" class="space-y-4">
                 <input type="text" id="input-title" placeholder="Judul..." class="w-full bg-gray-50 p-4 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold text-lg">
                 
-                <textarea id="input-body" placeholder="Tulis sesuatu..." class="w-full bg-gray-50 p-4 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500 h-32 resize-none hidden"></textarea>
+                <textarea id="input-body" placeholder="Tulis sesuatu... (Ketik '1. ' lalu Enter untuk list otomatis)" class="w-full bg-gray-50 p-4 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500 h-48 resize-none hidden"></textarea>
                 
                 <div id="input-expense-area" class="hidden">
                      <div class="relative">
@@ -247,7 +228,7 @@
                     </div>
                 </div>
 
-                <button onclick="saveItem()" class="w-full bg-brand-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-brand-200 active:scale-[0.98] transition-transform">
+                <button onclick="saveItem()" id="btn-save" class="w-full bg-brand-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-brand-200 active:scale-[0.98] transition-transform">
                     Simpan
                 </button>
             </div>
@@ -263,24 +244,22 @@
             expenses: []
         };
         let currentType = 'note';
+        let editingIndex = null; // Menyimpan index item yang sedang diedit
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Register Service Worker
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('SW Registered!', reg))
-                .catch(err => console.log('SW Failed!', err));
+                .catch(err => console.log('SW Fail', err));
             }
 
-            // Load Data
             const saved = localStorage.getItem('meNotePremiumData');
             if (saved) {
                 appData = JSON.parse(saved);
             }
             renderAll();
+            setupAutoNumbering();
 
-            // Landing Animation Timer
             setTimeout(() => {
                 const landing = document.getElementById('landing-screen');
                 const app = document.getElementById('app-container');
@@ -290,12 +269,45 @@
             }, 2500);
         });
 
+        // --- Logic Auto Numbering (Fitur Baru) ---
+        function setupAutoNumbering() {
+            const textarea = document.getElementById('input-body');
+            
+            textarea.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const cursorPosition = this.selectionStart;
+                    const textBeforeCursor = this.value.substring(0, cursorPosition);
+                    const textAfterCursor = this.value.substring(cursorPosition);
+                    
+                    // Ambil baris terakhir sebelum kursor
+                    const lastLineIndex = textBeforeCursor.lastIndexOf('\n');
+                    const currentLine = textBeforeCursor.substring(lastLineIndex + 1);
+
+                    // Cek pola angka (contoh: "1. ")
+                    const regex = /^(\d+)\.\s/;
+                    const match = currentLine.match(regex);
+
+                    if (match) {
+                        e.preventDefault(); // Mencegah enter biasa
+                        const currentNumber = parseInt(match[1]);
+                        const nextNumber = currentNumber + 1;
+                        const insertion = `\n${nextNumber}. `;
+                        
+                        // Masukkan angka baru
+                        this.value = textBeforeCursor + insertion + textAfterCursor;
+                        
+                        // Pindahkan kursor ke setelah angka baru
+                        this.selectionStart = this.selectionEnd = cursorPosition + insertion.length;
+                    }
+                }
+            });
+        }
+
         function saveData() {
             localStorage.setItem('meNotePremiumData', JSON.stringify(appData));
             renderAll();
         }
 
-        // --- Navigation Logic ---
         function switchTab(tabName) {
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 const isActive = btn.dataset.tab === tabName;
@@ -309,7 +321,7 @@
             document.getElementById(`view-${tabName}`).classList.remove('hidden');
         }
 
-        // --- Rendering Functions ---
+        // --- Rendering ---
         function renderAll() {
             renderNotes();
             renderCodes();
@@ -321,10 +333,10 @@
             list.innerHTML = '';
             appData.notes.forEach((note, index) => {
                 list.innerHTML += `
-                    <div class="bg-white p-4 rounded-2xl border border-gray-50 shadow-sm relative group">
-                         <button onclick="deleteItem('notes', ${index})" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition"><i class="ph ph-x-circle text-xl"></i></button>
+                    <div onclick="openModal('note', ${index})" class="bg-white p-4 rounded-2xl border border-gray-50 shadow-sm relative group cursor-pointer active:bg-gray-50 transition">
+                         <button onclick="event.stopPropagation(); deleteItem('notes', ${index})" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition"><i class="ph ph-x-circle text-xl"></i></button>
                         <h4 class="font-bold text-gray-800 mb-1">${note.title}</h4>
-                        <p class="text-sm text-gray-500 line-clamp-2">${note.body}</p>
+                        <p class="text-sm text-gray-500 line-clamp-2 whitespace-pre-wrap">${escapeHtml(note.body)}</p>
                         <span class="text-[10px] text-gray-300 mt-2 block">${new Date(note.date).toLocaleDateString('id-ID')}</span>
                     </div>
                 `;
@@ -336,8 +348,8 @@
             list.innerHTML = '';
             appData.codes.forEach((code, index) => {
                 list.innerHTML += `
-                    <div class="bg-gray-900 p-4 rounded-2xl shadow-md border border-gray-800 relative group overflow-hidden">
-                        <button onclick="deleteItem('codes', ${index})" class="absolute top-4 right-4 text-gray-600 hover:text-red-400 transition z-10"><i class="ph ph-trash text-lg"></i></button>
+                    <div onclick="openModal('code', ${index})" class="bg-gray-900 p-4 rounded-2xl shadow-md border border-gray-800 relative group overflow-hidden cursor-pointer active:scale-[0.99] transition">
+                        <button onclick="event.stopPropagation(); deleteItem('codes', ${index})" class="absolute top-4 right-4 text-gray-600 hover:text-red-400 transition z-10"><i class="ph ph-trash text-lg"></i></button>
                         <div class="flex items-center gap-2 mb-3 border-b border-gray-800 pb-2">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -357,7 +369,7 @@
             appData.expenses.forEach((item, index) => {
                 total += parseInt(item.price);
                 list.innerHTML += `
-                    <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50">
+                    <div onclick="openModal('expense', ${index})" class="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50 cursor-pointer active:bg-gray-50">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs">
                                 <i class="ph ph-shopping-bag"></i>
@@ -366,7 +378,7 @@
                         </div>
                         <div class="flex items-center gap-3">
                              <span class="text-sm font-bold text-gray-900">Rp ${parseInt(item.price).toLocaleString('id-ID')}</span>
-                             <button onclick="deleteItem('expenses', ${index})" class="text-gray-300 hover:text-red-500"><i class="ph ph-trash"></i></button>
+                             <button onclick="event.stopPropagation(); deleteItem('expenses', ${index})" class="text-gray-300 hover:text-red-500"><i class="ph ph-trash"></i></button>
                         </div>
                     </div>
                 `;
@@ -374,33 +386,54 @@
             document.getElementById('total-expense').innerText = `Rp ${total.toLocaleString('id-ID')}`;
         }
 
-        // --- CRUD Logic ---
-        function openModal(type) {
+        // --- CRUD Logic (Updated for Edit) ---
+        function openModal(type, index = null) {
             currentType = type;
+            editingIndex = index; // Set index global
+            
             const modal = document.getElementById('input-modal');
             const content = document.getElementById('modal-content');
             const titleInput = document.getElementById('input-title');
             const bodyInput = document.getElementById('input-body');
             const priceArea = document.getElementById('input-expense-area');
+            const priceInput = document.getElementById('input-price');
+            const saveBtn = document.getElementById('btn-save');
+            const modeIndicator = document.getElementById('mode-indicator');
 
+            // Reset UI Default
             titleInput.value = '';
             bodyInput.value = '';
-            document.getElementById('input-price').value = '';
+            priceInput.value = '';
             
+            // Cek jika ini mode Edit
+            if (index !== null) {
+                modeIndicator.classList.remove('hidden');
+                saveBtn.innerText = 'Perbarui';
+                const data = appData[type === 'note' ? 'notes' : type === 'code' ? 'codes' : 'expenses'][index];
+                
+                titleInput.value = data.title;
+                if(data.body) bodyInput.value = data.body;
+                if(data.price) priceInput.value = data.price;
+            } else {
+                modeIndicator.classList.add('hidden');
+                saveBtn.innerText = 'Simpan';
+            }
+
+            // Atur Tampilan Input berdasarkan tipe
             if (type === 'note') {
-                document.getElementById('modal-title').innerText = 'Tulis Catatan';
+                document.getElementById('modal-title').innerText = index !== null ? 'Edit Catatan' : 'Tulis Catatan';
                 titleInput.placeholder = "Judul Catatan";
                 bodyInput.classList.remove('hidden', 'font-mono', 'bg-gray-900', 'text-white');
                 priceArea.classList.add('hidden');
             } else if (type === 'code') {
-                document.getElementById('modal-title').innerText = 'Simpan Kode';
+                document.getElementById('modal-title').innerText = index !== null ? 'Edit Kode' : 'Simpan Kode';
                 titleInput.placeholder = "Nama File / Bahasa";
                 bodyInput.classList.remove('hidden');
                 bodyInput.classList.add('font-mono', 'bg-gray-900', 'text-white');
                 bodyInput.placeholder = "Tempel kodemu disini...";
                 priceArea.classList.add('hidden');
             } else if (type === 'expense') {
-                document.getElementById('modal-title').innerText = 'Catat Pengeluaran';
+                document.getElementById('modal-title').innerText = index !== null ? 'Edit Pengeluaran' : 'Catat Pengeluaran';
                 titleInput.placeholder = "Nama Barang";
                 bodyInput.classList.add('hidden');
                 priceArea.classList.remove('hidden');
@@ -414,7 +447,10 @@
             const modal = document.getElementById('input-modal');
             const content = document.getElementById('modal-content');
             content.classList.add('translate-y-full');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                editingIndex = null; // Reset index edit
+            }, 300);
         }
 
         function saveItem() {
@@ -424,13 +460,22 @@
 
             if (!title) return alert('Mohon isi judul!');
 
-            if (currentType === 'note') {
-                appData.notes.unshift({ title, body, date: new Date() });
-            } else if (currentType === 'code') {
-                appData.codes.unshift({ title, body, date: new Date() });
-            } else if (currentType === 'expense') {
+            const newData = { title, date: new Date() };
+            if (currentType === 'expense') {
                 if (!price) return alert('Mohon isi harga!');
-                appData.expenses.unshift({ title, price, date: new Date() });
+                newData.price = price;
+            } else {
+                newData.body = body;
+            }
+
+            const category = currentType === 'note' ? 'notes' : currentType === 'code' ? 'codes' : 'expenses';
+
+            if (editingIndex !== null) {
+                // Logic Update/Edit
+                appData[category][editingIndex] = { ...appData[category][editingIndex], ...newData };
+            } else {
+                // Logic Create New (Add to top)
+                appData[category].unshift(newData);
             }
 
             saveData();
@@ -452,6 +497,7 @@
         }
 
         function escapeHtml(text) {
+            if (!text) return "";
             return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
